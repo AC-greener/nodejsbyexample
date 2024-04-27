@@ -12,7 +12,8 @@ if (!jsFileBaseName) {
 const jsFileName = `./src/examples/${jsFileBaseName}/${jsFileBaseName}.js`;
 // 生成HTML文件的完整路径
 const htmlFilePath = path.join("./src/pages", `${jsFileBaseName}.html`);
-
+const commentsMDFilePath = path.join("./src/pages", `${jsFileBaseName}_comment.md`);
+const codeMDFilePath = path.join("./src/pages", `${jsFileBaseName}_code.md`);
 // 删除可能存在的同名HTML文件
 if (fs.existsSync(htmlFilePath)) {
   fs.unlinkSync(htmlFilePath);
@@ -73,13 +74,14 @@ fs.readFile(jsFileName, "utf8", (err, data) => {
         codeArray.push(line);
       }
     });
-    // 如果 code 长度小于 comment 长度，向 code 数组填充 'empty code'
+  
+    // 如果代码行数小于注释行数，向代码数组填充占位的div
     while (commentArray.length > codeArray.length) {
-      codeArray.push("empty code");
+      codeArray.push('  ');
     }
-    // 检查如果code长度大于comment长度，在comment数组中填充空字符串
+    // 检查如果代码行数大于注释行数，在注释数组中填充占位的div
     while (codeArray.length > commentArray.length) {
-      commentArray.push("empty comment");
+      commentArray.push('<div style="min-height: 24px;"></div>');
     }
 
     // 构建section对象，返回
@@ -90,58 +92,57 @@ fs.readFile(jsFileName, "utf8", (err, data) => {
   });
 
   // 输出结果或进行其它操作
-  console.log(processedSections);
-  let htmlOutput = ''
-  processedSections.forEach((section, groupIndex) => {
-    // 开始一个新的 group
-    htmlOutput += `<div class="group">\n`;
-  
-    // 每一对 comment 和 code 创建一个 row
-    section.comment.forEach((comment, rowIndex) => {
-      const codeLine = section.code[rowIndex]; // 用索引获取对应的代码行
-  
-      // 添加 row 到 group 中
-      htmlOutput += `  <div class="row">\n`;
-      htmlOutput += `    <div class="comment-${rowIndex}">${comment}</div>\n`;
-      htmlOutput += `    <div class="code-${rowIndex}">${codeLine}</div>\n`;
-      htmlOutput += `  </div>\n`;
+  // console.log(processedSections);
+  // let htmlOutput = "";
+  // processedSections.forEach((section, groupIndex) => {
+  //   // 开始一个新的 group
+  //   htmlOutput += `<div class="group">\n`;
+
+  //   // 每一对 comment 和 code 创建一个 row
+  //   section.comment.forEach((comment, rowIndex) => {
+  //     const codeLine = section.code[rowIndex]; // 用索引获取对应的代码行
+
+  //     // 添加 row 到 group 中
+  //     htmlOutput += `  <div class="row">\n`;
+  //     htmlOutput += `    <div class="comment-${rowIndex}">${comment}</div>\n`;
+  //     htmlOutput += `    <div class="code-${rowIndex}">${codeLine}</div>\n`;
+  //     htmlOutput += `  </div>\n`;
+  //   });
+
+  //   // 结束当前的 group
+  //   htmlOutput += `</div>\n`;
+  // });
+
+  // // 输出 HTML 结果或者用于页面渲染
+  // console.log(htmlOutput);
+
+  // 提取注释和代码到各自的Markdown字符串
+  let commentsMDString = "";
+  let codeMDString = "";
+
+  processedSections.forEach((section) => {
+    section.comment.forEach((comment) => {
+      commentsMDString += comment.replace("// ", "") + "\n\n";
     });
-  
-    // 结束当前的 group
-    htmlOutput += `</div>\n`;
+    section.code.forEach((codeLine) => {
+      codeMDString += "```javascript\n" + codeLine + "\n```\n\n";
+    });
   });
-  
-  // 输出 HTML 结果或者用于页面渲染
-  console.log(htmlOutput);
 
-  // 用于美化和布局的基本CSS
-  const cssStyles = `
-  <style>
-    .row {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 10px;
-    }
-    .comment-container {
-      flex-basis: 50%;
-    }
-    pre {
-      margin: 0;
-    }
-  </style>
-  `;
-
-  // 创建HTML文件的内容
-  htmlContent = `${cssStyles}<div class="content-container">${htmlOutput}</div>`;
-
-  // 写入HTML文件
-  fs.writeFile(htmlFilePath, htmlContent, "utf8", (err) => {
+  // 将注释和代码写入到对应的Markdown文件
+  fs.writeFile(commentsMDFilePath, commentsMDString, "utf8", (err) => {
     if (err) {
-      console.error(`写入HTML文件${htmlFilePath}时发生错误:`, err);
+      console.error(`写入Markdown文件${commentsMDFilePath}时发生错误:`, err);
       return;
     }
-    console.log(
-      `已将 ${jsFileName} 的注释和代码转换成基于div布局的HTML格式，并保存到 ${htmlFilePath}`
-    );
+    console.log(`注释已保存到 ${commentsMDFilePath}`);
+  });
+
+  fs.writeFile(codeMDFilePath, codeMDString, "utf8", (err) => {
+    if (err) {
+      console.error(`写入Markdown文件${codeMDFilePath}时发生错误:`, err);
+      return;
+    }
+    console.log(`代码已保存到 ${codeMDFilePath}`);
   });
 });
