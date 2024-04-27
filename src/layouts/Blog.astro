@@ -1,0 +1,18 @@
+---
+import Layout from './Layout.astro';
+import ExampleMarkdown from '../components/a.md'
+---
+
+<Layout title="Welcome to Astro.">
+	<div class="blog-content">
+		<div><ExampleMarkdown/></div>
+		<div><slot/></div>
+	</div>
+</Layout>
+
+<style>
+	.blog-content {
+		display: flex;
+	}
+	
+</style>

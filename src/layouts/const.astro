@@ -1,0 +1,30 @@
+---
+import Layout from './Layout.astro';
+import ConstCode from './const_code.md'
+import ConstComment from './const_comment.md'
+---
+
+<Layout title="Welcome to Astro.">
+	<!-- <div class="prose mx-auto px-4 lg:px-0 my-12 lg:my-12 max-w-none blog-content"> -->
+	<div class="blog-content">
+		<div class="comment-wrapper"><ConstComment/></div>
+		<div><ConstCode/></div>
+	</div>
+</Layout>
+
+<style>
+	.blog-content {
+		display: flex;
+	}
+	.comment-wrapper {
+		p {
+			height: 19px;
+			line-height: 19px;
+			margin-bottom: 38px;
+		}
+	}
+	.line {
+		border-bottom: 1px solid white !important;
+	}
+	
+</style>
