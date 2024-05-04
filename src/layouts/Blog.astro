@@ -1,18 +1,38 @@
 ---
 import Layout from './Layout.astro';
-import ExampleMarkdown from '../components/a.md'
+const { title } = Astro.props;
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout title={title}>
+	<h1 class="title">
+		<a href="/">Nodejs by Example</a>: <slot name="title" />
+	</h1>
 	<div class="blog-content">
-		<div><ExampleMarkdown/></div>
-		<div><slot/></div>
+		<div class="comment-wrapper">
+			<slot name="comment" />
+		</div>
+		<div class="code-wrapper">
+			<slot name="code" />
+		</div>
 	</div>
 </Layout>
 
 <style>
+	.title {
+		font-size: 32px;
+    line-height: 40px;
+    margin-top: 40px;
+		margin-bottom: 15px
+	}
 	.blog-content {
 		display: flex;
+	}
+	.line {
+		border-bottom: 1px solid white !important;
+	}
+	.comment-wrapper {
+		padding-right: 20px;
+		width: 420px;
 	}
 	
 </style>
