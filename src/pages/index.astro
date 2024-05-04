@@ -1,21 +1,134 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+
+const postFiles = await Astro.glob("./*.astro");
+const posts = postFiles.map((filePath) => {
+  const postName = filePath.url.split("/").pop().replace(".astro", ""); // 从文件路径截取文件名并去除后缀
+  return postName;
+});
+const list = [
+  { "eng-name": "Hello World", name: "你好，世界" },
+  { "eng-name": "Primitive Values", name: "基本类型值" },
+  { "eng-name": "Variables", name: "变量" },
+  { "eng-name": "Const", name: "常量" },
+  { "eng-name": "Loops", name: "循环" },
+  { "eng-name": "If/Else", name: "条件判断" },
+  { "eng-name": "Switch", name: "选择语句" },
+  { "eng-name": "Arrays", name: "数组" },
+  { "eng-name": "Buffer", name: "缓冲区" },
+  { "eng-name": "Objects", name: "对象" },
+  { "eng-name": "Iterating", name: "迭代" },
+  { "eng-name": "Functions", name: "函数" },
+  { "eng-name": "Returning Multiple Values", name: "返回多个值" },
+  { "eng-name": "Rest Parameters", name: "剩余参数" },
+  { "eng-name": "Closures", name: "闭包" },
+  { "eng-name": "Recursion", name: "递归" },
+  { "eng-name": "References", name: "引用" },
+  { "eng-name": "String and Character Encoding", name: "字符串与字符编码" },
+  { "eng-name": "Object-Oriented Programming", name: "面向对象编程" },
+  { "eng-name": "Class Methods", name: "类方法" },
+  { "eng-name": "Prototypes and Inheritance", name: "原型与继承" },
+  { "eng-name": "Composition", name: "组合" },
+  { "eng-name": "Promises & Async/Await", name: "Promises与异步/等待" },
+  { "eng-name": "Error Handling and Callbacks", name: "错误处理与回调" },
+  { "eng-name": "Creating Custom Error Types", name: "创建自定义错误类型" },
+  { "eng-name": "Asynchronous Patterns", name: "异步模式" },
+  { "eng-name": "Events and EventEmitter", name: "事件与事件发射器" },
+  { "eng-name": "Streams", name: "流" },
+  { "eng-name": "Stream Flow Control", name: "流控制" },
+  { "eng-name": "Async Control Flow", name: "异步控制流" },
+  { "eng-name": "Timers", name: "定时器" },
+  { "eng-name": "NextTick and setImmediate", name: "立即执行函数与下一个周期" },
+  { "eng-name": "Worker Threads", name: "工作线程" },
+  { "eng-name": "Rate Limiting", name: "速率限制" },
+  { "eng-name": "Atomics", name: "原子操作" },
+  { "eng-name": "Mutexes", name: "互斥锁" },
+  {
+    "eng-name": "State Management with Async Patterns",
+    name: "使用异步模式的状态管理",
+  },
+  { "eng-name": "Sorting", name: "排序" },
+  {
+    "eng-name": "Custom Sorting with Comparator Functions",
+    name: "使用比较函数进行自定义排序",
+  },
+  { "eng-name": "Unhandled Exceptions", name: "未处理的异常" },
+  { "eng-name": "Handling Asynchronous Errors", name: "处理异步错误" },
+  { "eng-name": "String Manipulation", name: "字符串操作" },
+  { "eng-name": "Template Literals", name: "模板字符串" },
+  { "eng-name": "Regular Expressions", name: "正则表达式" },
+  { "eng-name": "JSON Handling", name: "JSON处理" },
+  { "eng-name": "Working with XML", name: "XML处理" },
+  { "eng-name": "Date and Time with moment.js", name: "日期时间处理" },
+  { "eng-name": "Unix Epoch and Timestamps", name: "Unix时间戳" },
+  {
+    "eng-name": "Parsing and Formatting Date/Time",
+    name: "解析和格式化日期/时间",
+  },
+  { "eng-name": "Generating Random Numbers", name: "生成随机数" },
+  { "eng-name": "Parsing Numeric Strings", name: "解析数字字符串" },
+  { "eng-name": "url Parsing and Construction", name: "url解析与构建" },
+  { "eng-name": "Cryptography", name: "加密" },
+  { "eng-name": "File System Operations", name: "文件系统操作" },
+  { "eng-name": "Implementing Line Filters", name: "实现行过滤器" },
+  { "eng-name": "File and Directory Paths", name: "文件和目录路径" },
+  { "eng-name": "Working with Directories", name: "操作目录" },
+  { "eng-name": "Temporary Files and Directories", name: "临时文件和目录" },
+  { "eng-name": "The require cache", name: "模块缓存" },
+  { "eng-name": "Unit Testing and Benchmarking", name: "单元测试和基准测试" },
+  { "eng-name": "Processing Command-Line Arguments", name: "处理命令行参数" },
+  { "eng-name": "Command-Line Flags", name: "命令行标志" },
+  { "eng-name": "Subcommands", name: "子命令" },
+  { "eng-name": "Managing Environment Variables", name: "管理环境变量" },
+  { "eng-name": "Application Logging", name: "应用日志记录" },
+  { "eng-name": "HTTP/HTTPS Client", name: "HTTP/HTTPS客户端" },
+  { "eng-name": "Creating an HTTP Server", name: "创建HTTP服务器" },
+  { "eng-name": "Using the context module", name: "使用上下文模块" },
+  { "eng-name": "Spawning Child Processes", name: "生成子进程" },
+  { "eng-name": "Executing Child Processes Directly", name: "直接执行子进程" },
+  { "eng-name": "Handling OS Signals", name: "处理操作系统信号" },
+  { "eng-name": "Process Termination", name: "进程终止" },
+];
+// 转换list中的eng-name使其符合所需格式
+const formattedList = list.map((item) => ({
+  url: item['eng-name'].toLowerCase().replace(/\s+/g, '-'), // 将字符串转小写并以连字符代替空格
+  name: item['eng-name']
+}));
 ---
 
 <Layout title="Nodejs by Example">
-	<main>
-		hello nodejs
-	</main>
+  <main>
+    <header>Nodejs by Example</header>
+    <div class="desc"></div>
+    <ul>
+      {
+        formattedList.map((item) => (
+          <li>
+            <a href={`/${item.url}`}>{item.name}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </main>
 </Layout>
 
-<style>
-	main {
-		margin: auto;
-		padding: 1rem;
-		width: 800px;
-		max-width: calc(100% - 2rem);
-		font-size: 20px;
-		line-height: 1.6;
-	}
-	
+<style lang="less">
+  main {
+    width: 420px;
+    min-width: 420px;
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  header {
+    font-size: 32px;
+    line-height: 40px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+  ul {
+    a {
+      text-decoration: underline;
+    }
+  }
 </style>
