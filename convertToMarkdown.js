@@ -13,6 +13,7 @@ const jsFileName = `./src/examples/${jsFileBaseName}/${jsFileBaseName}.js`;
 // 生成HTML文件的完整路径
 const commentsMDFilePath = path.join(`./src/examples/${jsFileBaseName}`, `${jsFileBaseName}_comment.md`);
 const codeMDFilePath = path.join(`./src/examples/${jsFileBaseName}`, `${jsFileBaseName}_code.md`);
+const combinedCommentsMDFilePath = path.join(`./src/examples/${jsFileBaseName}`, `${jsFileBaseName}_combined_comments.md`);
 
 // 读取JS文件
 fs.readFile(jsFileName, "utf8", (err, data) => {
@@ -22,14 +23,36 @@ fs.readFile(jsFileName, "utf8", (err, data) => {
   }
 
   // 按行分割文件以便逐行处理
-  const lines = data.split("\n");
-  // console.log(lines);
+  let lines = data.split("\n");
   // 初始化二维数组和当前段落（子数组）
   let sections = [];
   let currentSection = [];
+  let reachedFirstEmptyLine = false;
+  let collectedComments = [];
+  let resultLines = [];
+  
+  lines.forEach((line) => {
+    if (line.trim() === '' && !reachedFirstEmptyLine) {
+      reachedFirstEmptyLine = true;
+      // 将所有收集的注释合并成一行，跟随在第一个空行后面
+      if (collectedComments.length) {
+        // resultLines.push(collectedComments.join(' '));
+      }
+      // 将第一个空行也放入结果中
+      resultLines.push(line);
+      console.log(line)
+    } else if (!reachedFirstEmptyLine && line.trim().startsWith('//')) {
+      // 收集所有第一个空行之前的注释
+      collectedComments.push(line.trim().substring(2).trim());
+    } else {
+      // 不是注释，或已经过了第一个空行。将行添加到结果中
+      console.log(line)
+      resultLines.push(line);
+    }
+  });
 
   // 处理每一行
-  lines.forEach((line) => {
+  resultLines.forEach((line) => {
     if (line.trim() === "") {
       // 如果是空行，且当前段落（子数组）不为空，则添加到二维数组中
       if (currentSection.length > 0) {
@@ -41,6 +64,9 @@ fs.readFile(jsFileName, "utf8", (err, data) => {
       currentSection.push(line);
     }
   });
+  console.log(resultLines)
+    // 将所有注释合并为一个字符串，并且每条注释之间用一个空格隔开
+    const combinedCommentsString = collectedComments.join("");
 
   // 不要遗漏文件最后一个段落（如果存在）
   if (currentSection.length > 0) {
@@ -49,8 +75,6 @@ fs.readFile(jsFileName, "utf8", (err, data) => {
 
   // 在这里可以对二维数组 `sections` 进行进一步处理
   // 例如打印出来检查格式是否正确
-  console.log(sections);
-  console.log(22);
 
   const processedSections = sections.map((section) => {
     // 分别用于收集注释和代码的数组
@@ -95,6 +119,15 @@ fs.readFile(jsFileName, "utf8", (err, data) => {
     section.code.forEach((codeLine) => {
       codeMDString += "```javascript\n" + codeLine + "\n```\n\n";
     });
+  });
+
+  // 将合并后的注释写入新的Markdown文件
+  fs.writeFile(combinedCommentsMDFilePath, combinedCommentsString, "utf8", (err) => {
+    if (err) {
+      console.error(`写入Markdown文件${combinedCommentsMDFilePath}时发生错误:`, err);
+      return;
+    }
+    console.log(`合并后的注释已保存到 ${combinedCommentsMDFilePath}`);
   });
 
   // 将注释和代码写入到对应的Markdown文件

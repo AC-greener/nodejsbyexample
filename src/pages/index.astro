@@ -7,12 +7,12 @@ const posts = postFiles.map((filePath) => {
   return postName;
 });
 const list = [
-  { "eng-name": "Hello World", name: "你好，世界" },
+  { "eng-name": "Hello World", name: "Hello World" },
+  { "eng-name": "Values", name: "变量" },
   { "eng-name": "Primitive Values", name: "基本类型值" },
-  { "eng-name": "Variables", name: "变量" },
   { "eng-name": "Const", name: "常量" },
   { "eng-name": "Loops", name: "循环" },
-  { "eng-name": "If/Else", name: "条件判断" },
+  { "eng-name": "If Else", name: "条件判断" },
   { "eng-name": "Switch", name: "选择语句" },
   { "eng-name": "Arrays", name: "数组" },
   { "eng-name": "Buffer", name: "缓冲区" },
@@ -92,7 +92,7 @@ const list = [
 // 转换list中的eng-name使其符合所需格式
 const formattedList = list.map((item) => ({
   url: item['eng-name'].toLowerCase().replace(/\s+/g, '-'), // 将字符串转小写并以连字符代替空格
-  name: item['eng-name']
+  name: item['name']
 }));
 ---
 
