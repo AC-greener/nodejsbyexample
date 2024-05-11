@@ -1,0 +1,6 @@
+{
+  "watch": ["src/"],
+  "ext": "js,json,md",
+  "ignore": ["src/examples/**/*.test.js", "src/examples/**/*.md"],
+  "exec": "node convertToMarkdown.js values"
+}
