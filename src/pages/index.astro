@@ -1,16 +1,16 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
-const postFiles = await Astro.glob("./*.astro");
-const posts = postFiles.map((filePath) => {
-  const postName = filePath.url.split("/").pop().replace(".astro", ""); // 从文件路径截取文件名并去除后缀
-  return postName;
-});
+// const postFiles = await Astro.glob("./*.astro");
+// const posts = postFiles.map((filePath) => {
+//   const postName = filePath.url.split("/").pop().replace(".astro", ""); // 从文件路径截取文件名并去除后缀
+//   return postName;
+// });
 const list = [
   { "eng-name": "Hello World", name: "Hello World" },
   { "eng-name": "Values", name: "变量" },
-  { "eng-name": "Primitive Values", name: "基本类型值" },
   { "eng-name": "Const", name: "常量" },
+  { "eng-name": "Primitive Values", name: "基本类型值" },
   { "eng-name": "Loops", name: "循环" },
   { "eng-name": "If Else", name: "条件判断" },
   { "eng-name": "Switch", name: "选择语句" },

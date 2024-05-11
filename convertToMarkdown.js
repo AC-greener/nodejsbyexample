@@ -64,7 +64,7 @@ fs.readFile(jsFileName, "utf8", (err, data) => {
       currentSection.push(line);
     }
   });
-  console.log(resultLines)
+  console.log(11, resultLines)
     // 将所有注释合并为一个字符串，并且每条注释之间用一个空格隔开
     const combinedCommentsString = collectedComments.join("");
 
@@ -83,6 +83,7 @@ fs.readFile(jsFileName, "utf8", (err, data) => {
 
     // 遍历子数组中的每一行
     section.forEach((line) => {
+      console.log('line:', line)
       if (line.trim().startsWith("//")) {
         // 如果是注释，去掉'//'，并且添加到注释数组
         commentArray.push(line.trim());
@@ -91,6 +92,8 @@ fs.readFile(jsFileName, "utf8", (err, data) => {
         codeArray.push(line);
       }
     });
+    console.log('commentArray', commentArray)
+    console.log('codeArray', codeArray)
   
     // 如果代码行数小于注释行数，向代码数组填充占位的div
     while (commentArray.length > codeArray.length) {
