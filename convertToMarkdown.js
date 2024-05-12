@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const writeMarkdownFile = require("./fileWriter");
-
+const {splitCommentToMultiLines, isNotContainChinese } = require('./utils')
 // 从命令行参数中接收JS文件名的基本部分
 const jsFileBaseName = process.argv[2];
 if (!jsFileBaseName) {
@@ -110,7 +110,12 @@ fs.readFile(jsFileName, "utf8", (err, data) => {
       // console.log("line:", line);
       if (line.trim().startsWith("//")) {
         // 如果是注释，去掉'//'，并且添加到注释数组
-        commentArray.push(line.trim());
+        // commentArray.push(line.trim());
+        // console.log('line', line)
+        const commentContent = line.trim().substring(2).trim();
+        const maxLineLength = isNotContainChinese(commentContent) ? 45 : 28;
+        const splitComments = splitCommentToMultiLines(commentContent, maxLineLength);
+        commentArray.push(...splitComments);
       } else {
         // 否则，作为代码添加到代码数组
         codeArray.push(line);
@@ -125,13 +130,16 @@ fs.readFile(jsFileName, "utf8", (err, data) => {
     while (codeArray.length > commentArray.length) {
       commentArray.push('<div style="min-height: 24px;"></div>');
     }
+    console.log('codeArray', codeArray)
+    console.log('commentArray', commentArray)
 
     return {
       comment: commentArray,
       code: codeArray,
     };
   });
-
+// console.log('processedSections:', processedSections)
+// console.log('code:', code)
   // 提取注释和代码到各自的Markdown字符串
   let commentsMDString = "";
   let codeMDString = "```javascript\n"; // 在代码块开始处添加标识
