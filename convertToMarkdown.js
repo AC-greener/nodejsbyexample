@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const writeMarkdownFile = require("./fileWriter");
 
 // 从命令行参数中接收JS文件名的基本部分
 const jsFileBaseName = process.argv[2];
@@ -10,10 +11,19 @@ if (!jsFileBaseName) {
 
 // 完整的JS文件路径
 const jsFileName = `./src/examples/${jsFileBaseName}/${jsFileBaseName}.js`;
-// 生成HTML文件的完整路径
-const commentsMDFilePath = path.join(`./src/examples/${jsFileBaseName}`, `${jsFileBaseName}_comment.md`);
-const codeMDFilePath = path.join(`./src/examples/${jsFileBaseName}`, `${jsFileBaseName}_code.md`);
-const combinedCommentsMDFilePath = path.join(`./src/examples/${jsFileBaseName}`, `${jsFileBaseName}_combined_comments.md`);
+// 生成mkdown文件的完整路径
+const commentsMDFilePath = path.join(
+  `./src/examples/${jsFileBaseName}`,
+  `${jsFileBaseName}_comment.md`
+);
+const codeMDFilePath = path.join(
+  `./src/examples/${jsFileBaseName}`,
+  `${jsFileBaseName}_code.md`
+);
+const combinedCommentsMDFilePath = path.join(
+  `./src/examples/${jsFileBaseName}`,
+  `${jsFileBaseName}_combined_comments.md`
+);
 
 // 读取JS文件
 fs.readFile(jsFileName, "utf8", (err, data) => {
@@ -30,9 +40,10 @@ fs.readFile(jsFileName, "utf8", (err, data) => {
   let reachedFirstEmptyLine = false;
   let collectedComments = [];
   let resultLines = [];
-  
-  lines.forEach((line) => {
-    if (line.trim() === '' && !reachedFirstEmptyLine) {
+
+  lines.forEach((line, index) => {
+    if (line.trim() === "" && !reachedFirstEmptyLine) {
+      console.log(line, index)
       reachedFirstEmptyLine = true;
       // 将所有收集的注释合并成一行，跟随在第一个空行后面
       if (collectedComments.length) {
@@ -40,37 +51,46 @@ fs.readFile(jsFileName, "utf8", (err, data) => {
       }
       // 将第一个空行也放入结果中
       resultLines.push(line);
-      console.log(line)
-    } else if (!reachedFirstEmptyLine && line.trim().startsWith('//')) {
+      // console.log(line);
+    } else if (!reachedFirstEmptyLine && line.trim().startsWith("//")) {
       // 收集所有第一个空行之前的注释
       collectedComments.push(line.trim().substring(2).trim());
+      console.log(line, index)
     } else {
       // 不是注释，或已经过了第一个空行。将行添加到结果中
-      console.log(line)
+      // console.log(line);
+      console.log(line, index)
       resultLines.push(line);
     }
   });
-// 处理每一行
-resultLines.forEach((line) => {
-  if (line.trim() === "") {
-    // 如果是空行，直接添加到当前段落中，作为保留空行的占位符
-    currentSection.push("");
-  } else {
-    // 非空行，加入当前段落中
-    currentSection.push(line);
+  if (resultLines[0] === "") {
+    resultLines = resultLines.slice(1)
   }
+  console.log(11, resultLines);
 
-  // 如果下一行是空行或者到了数组结尾，则将当前段落推入sections数组
-  if (line.trim() === "" || resultLines.indexOf(line) === resultLines.length - 1) {
-    if (currentSection.length > 0) {
-      sections.push(currentSection);
-      currentSection = []; // 开始新的段落（子数组）
+  // 处理每一行
+  resultLines.forEach((line) => {
+    if (line.trim() === "") {
+      // 如果是空行，直接添加到当前段落中，作为保留空行的占位符
+      currentSection.push("");
+    } else {
+      // 非空行，加入当前段落中
+      currentSection.push(line);
     }
-  }
-});
-  console.log(11, resultLines)
-    // 将所有注释合并为一个字符串，并且每条注释之间用一个空格隔开
-    const combinedCommentsString = collectedComments.join("");
+
+    // 如果下一行是空行或者到了数组结尾，则将当前段落推入sections数组
+    if (
+      line.trim() === "" ||
+      resultLines.indexOf(line) === resultLines.length - 1
+    ) {
+      if (currentSection.length > 0) {
+        sections.push(currentSection);
+        currentSection = []; // 开始新的段落（子数组）
+      }
+    }
+  });
+  // 将所有注释合并为一个字符串，并且每条注释之间用一个空格隔开
+  const combinedCommentsString = collectedComments.join("");
 
   // 不要遗漏文件最后一个段落（如果存在）
   if (currentSection.length > 0) {
@@ -87,7 +107,7 @@ resultLines.forEach((line) => {
 
     // 遍历子数组中的每一行
     section.forEach((line) => {
-      console.log('line:', line)
+      // console.log("line:", line);
       if (line.trim().startsWith("//")) {
         // 如果是注释，去掉'//'，并且添加到注释数组
         commentArray.push(line.trim());
@@ -96,19 +116,16 @@ resultLines.forEach((line) => {
         codeArray.push(line);
       }
     });
-    console.log('commentArray', commentArray)
-    console.log('codeArray', codeArray)
-  
-    // 如果代码行数小于注释行数，向代码数组填充占位的div
+
+    // 向代码数组填充占位
     while (commentArray.length > codeArray.length) {
-      codeArray.push('  ');
+      codeArray.push("  ");
     }
-    // 检查如果代码行数大于注释行数，在注释数组中填充占位的div
+    // 在注释数组中填充占位的div
     while (codeArray.length > commentArray.length) {
       commentArray.push('<div style="min-height: 24px;"></div>');
     }
 
-    // 构建section对象，返回
     return {
       comment: commentArray,
       code: codeArray,
@@ -124,38 +141,31 @@ resultLines.forEach((line) => {
       commentsMDString += comment.replace("// ", "") + "\n\n";
     });
     section.code.forEach((codeLine) => {
-      console.log('codeLine:', codeLine)
-      // codeMDString += "```javascript\n" + codeLine + "\n```\n\n";
+      // console.log("codeLine:", codeLine);
       codeMDString += codeLine + "\n";
-
     });
   });
   // 在代码块结束处添加标识
-codeMDString += "```\n";
+  codeMDString += "```\n";
 
-  // 将合并后的注释写入新的Markdown文件
-  fs.writeFile(combinedCommentsMDFilePath, combinedCommentsString, "utf8", (err) => {
-    if (err) {
-      console.error(`写入Markdown文件${combinedCommentsMDFilePath}时发生错误:`, err);
-      return;
-    }
-    console.log(`合并后的注释已保存到 ${combinedCommentsMDFilePath}`);
-  });
+  writeMarkdownFile(
+    combinedCommentsMDFilePath,
+    combinedCommentsString,
+    `合并后的注释已保存到 ${combinedCommentsMDFilePath}`,
+    `写入Markdown文件${combinedCommentsMDFilePath}时发生错误:`
+  );
 
-  // 将注释和代码写入到对应的Markdown文件
-  fs.writeFile(commentsMDFilePath, commentsMDString, "utf8", (err) => {
-    if (err) {
-      console.error(`写入Markdown文件${commentsMDFilePath}时发生错误:`, err);
-      return;
-    }
-    console.log(`注释已保存到 ${commentsMDFilePath}`);
-  });
+  writeMarkdownFile(
+    commentsMDFilePath,
+    commentsMDString,
+    `注释已保存到 ${commentsMDFilePath}`,
+    `写入Markdown文件${commentsMDFilePath}时发生错误:`
+  );
 
-  fs.writeFile(codeMDFilePath, codeMDString, "utf8", (err) => {
-    if (err) {
-      console.error(`写入Markdown文件${codeMDFilePath}时发生错误:`, err);
-      return;
-    }
-    console.log(`代码已保存到 ${codeMDFilePath}`);
-  });
+  writeMarkdownFile(
+    codeMDFilePath,
+    codeMDString,
+    `代码已保存到 ${codeMDFilePath}`,
+    `写入Markdown文件${codeMDFilePath}时发生错误:`
+  );
 });
