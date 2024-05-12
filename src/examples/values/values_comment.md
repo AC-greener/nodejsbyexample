@@ -1,5 +1,3 @@
-<div style="min-height: 24px;"></div>
-
 字符串可以通过 + 连接。
 
 <div style="min-height: 24px;"></div>

@@ -1,5 +1,4 @@
 ```javascript
-
 console.log("a" + "b");
 
 console.log(1);

@@ -2,10 +2,13 @@
 import BlogLayout from '../layouts/Blog.astro';
 import Code from '../examples/const/const_code.md'
 import Comment from '../examples/const/const_comment.md'
+import Head from '../examples/const/const_combined_comments.md'
+
 ---
 
 <BlogLayout title="Nodejs by Example: Const">
 		<span slot="title"> Const</span>
+		<Head slot="head" />
 		<Comment slot="comment"/>
 		<Code slot="code"/>
 	</div>
