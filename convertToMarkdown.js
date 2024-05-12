@@ -50,20 +50,24 @@ fs.readFile(jsFileName, "utf8", (err, data) => {
       resultLines.push(line);
     }
   });
+// 处理每一行
+resultLines.forEach((line) => {
+  if (line.trim() === "") {
+    // 如果是空行，直接添加到当前段落中，作为保留空行的占位符
+    currentSection.push("");
+  } else {
+    // 非空行，加入当前段落中
+    currentSection.push(line);
+  }
 
-  // 处理每一行
-  resultLines.forEach((line) => {
-    if (line.trim() === "") {
-      // 如果是空行，且当前段落（子数组）不为空，则添加到二维数组中
-      if (currentSection.length > 0) {
-        sections.push(currentSection);
-        currentSection = []; // 开始新的段落（子数组）
-      }
-    } else {
-      // 非空行，加入当前段落中
-      currentSection.push(line);
+  // 如果下一行是空行或者到了数组结尾，则将当前段落推入sections数组
+  if (line.trim() === "" || resultLines.indexOf(line) === resultLines.length - 1) {
+    if (currentSection.length > 0) {
+      sections.push(currentSection);
+      currentSection = []; // 开始新的段落（子数组）
     }
-  });
+  }
+});
   console.log(11, resultLines)
     // 将所有注释合并为一个字符串，并且每条注释之间用一个空格隔开
     const combinedCommentsString = collectedComments.join("");
@@ -113,16 +117,21 @@ fs.readFile(jsFileName, "utf8", (err, data) => {
 
   // 提取注释和代码到各自的Markdown字符串
   let commentsMDString = "";
-  let codeMDString = "";
+  let codeMDString = "```javascript\n"; // 在代码块开始处添加标识
 
   processedSections.forEach((section) => {
     section.comment.forEach((comment) => {
       commentsMDString += comment.replace("// ", "") + "\n\n";
     });
     section.code.forEach((codeLine) => {
-      codeMDString += "```javascript\n" + codeLine + "\n```\n\n";
+      console.log('codeLine:', codeLine)
+      // codeMDString += "```javascript\n" + codeLine + "\n```\n\n";
+      codeMDString += codeLine + "\n";
+
     });
   });
+  // 在代码块结束处添加标识
+codeMDString += "```\n";
 
   // 将合并后的注释写入新的Markdown文件
   fs.writeFile(combinedCommentsMDFilePath, combinedCommentsString, "utf8", (err) => {
