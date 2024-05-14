@@ -1,47 +1,47 @@
 ---
-import Layout from './Layout.astro';
+import Layout from "./Layout.astro";
 const { title } = Astro.props;
 ---
 
 <Layout title={title}>
-	<h1 class="title">
-		<a href="/">Nodejs by Example</a>: <slot name="title" />
-	</h1>
-	<div class="lead">
-		<slot name="head" />
-	</div>
-	<div class="blog-content">
-		<div class="comment-wrapper">
-			<slot name="comment" />
-		</div>
-		<div class="code-wrapper">
-			<slot name="code" />
-		</div>
-	</div>
+  <h1 class="title">
+    <a href="/">Nodejs by Example</a>: <slot name="title" />
+  </h1>
+  <div class="lead">
+    <slot name="head" />
+  </div>
+  <div class="blog-content">
+    <div class="comment-wrapper">
+      <slot name="comment" />
+    </div>
+    <div class="code-wrapper">
+      <slot name="code" />
+    </div>
+  </div>
 </Layout>
 
 <style>
-	.title {
-		font-size: 32px;
+  .title {
+    font-size: 32px;
     line-height: 40px;
     margin-top: 40px;
-		margin-bottom: 15px
-	}
-	.blog-content {
-		display: flex;
-	}
-	.line {
-		border-bottom: 1px solid white !important;
-	}
-	.comment-wrapper, .lead {
-		padding-right: 20px;
-		width: 420px;
-	}
-	.code-wrapper {
-		width: 480px;
-	}
-	.lead {
-		margin-bottom: 16px;
-	}
-	
+    margin-bottom: 15px;
+  }
+  .blog-content {
+    display: flex;
+  }
+  .line {
+    border-bottom: 1px solid white !important;
+  }
+  .comment-wrapper,
+  .lead {
+    padding-right: 20px;
+    width: 420px;
+  }
+  .code-wrapper {
+    width: 480px;
+  }
+  .lead {
+    margin-bottom: 16px;
+  }
 </style>

@@ -1,16 +1,13 @@
 ---
-import BlogLayout from '../layouts/Blog.astro';
-import Code from '../examples/hello-world/hello-world_code.md'
-import Comment from '../examples/hello-world/hello-world_comment.md'
-import Head from '../examples/hello-world/hello-world_combined_comments.md'
-
+import BlogLayout from "../layouts/Blog.astro";
+import Code from "../examples/hello-world/hello-world_code.md";
+import Comment from "../examples/hello-world/hello-world_comment.md";
+import Head from "../examples/hello-world/hello-world_combined_comments.md";
 ---
 
 <BlogLayout title="Nodejs by Example: Hello-World">
-		<span slot="title"> Hello-World</span>
-    <Head slot="head" />
-		<Comment slot="comment"/>
-		<Code slot="code"/>
-	</div>
+  <span slot="title"> Hello-World</span>
+  <Head slot="head" />
+  <Comment slot="comment" />
+  <Code slot="code" />
 </BlogLayout>
-

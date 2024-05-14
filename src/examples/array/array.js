@@ -15,7 +15,7 @@ console.log(array.length); //输出 3
 array.push("dragonfruit");
 console.log(array); // 输出 ['avocado', 'banana', 'cherry', 'dragonfruit']
 
-// 在Node.js中，多维数组也很容易创建和使用
+// 在nodejs中，多维数组也很容易创建和使用
 let twoD = [];
 for (let i = 0; i < 2; i++) {
   twoD[i] = [];

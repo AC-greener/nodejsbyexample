@@ -1,4 +1,4 @@
-// 在JavaScript中, 'function' 关键字用于声明函数.
+// 在nodejs中, 'function' 关键字用于声明函数.
 
 // `plus` 函数接受两个参数 a 和 b,
 // 通过 return 语句, 返回这两个参数的和.
@@ -22,7 +22,7 @@ res = plusPlus(1, 2, 3);
 
 console.log('1+2+3 = ', res);
 
-// 函数的默认参数
+// 函数可以有默认参数
 // 'name' 参数具有默认值 'Friend'，age默认值为18
 function greet(name = "Friend", age = 18) {
   console.log(`Hello, my name is ${name} and I am ${age} years old.`);

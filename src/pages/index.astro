@@ -6,7 +6,7 @@ import Layout from "../layouts/Layout.astro";
 //   const postName = filePath.url.split("/").pop().replace(".astro", ""); // 从文件路径截取文件名并去除后缀
 //   return postName;
 // });
-const list = [ 
+const list = [
   // 基础概念
   { "eng-name": "Hello World", name: "Hello World" },
   { "eng-name": "Values", name: "变量" },
@@ -67,8 +67,8 @@ const list = [
 ];
 // 转换list中的eng-name使其符合所需格式
 const formattedList = list.map((item) => ({
-  url: item['eng-name'].toLowerCase().replace(/\s+/g, '-'), // 将字符串转小写并以连字符代替空格
-  name: item['name']
+  url: item["eng-name"].toLowerCase().replace(/\s+/g, "-"), // 将字符串转小写并以连字符代替空格
+  name: item["name"],
 }));
 ---
 
