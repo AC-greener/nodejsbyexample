@@ -1,0 +1,31 @@
+---
+import postList from "../postList";
+
+const getNextPost = (currentUrl) => {
+  const currentIndex = postList.findIndex(
+    (post) => "/" + post.url === currentUrl
+  );
+  if (currentIndex !== -1 && currentIndex < postList.length - 1) {
+    return postList[currentIndex + 1];
+  }
+  return null;
+};
+
+const nextPost = getNextPost(Astro.props.currentUrl);
+---
+
+<div>
+  {
+    nextPost ? (
+      <div>
+        Next example:
+        <a href={nextPost.url}>{nextPost.url}</a>
+      </div>
+    ) : null
+  }
+</div>
+<style>
+  a {
+    text-decoration: underline;
+  }
+</style>
