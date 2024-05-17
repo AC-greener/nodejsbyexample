@@ -7,7 +7,7 @@
 
 ## 涵盖的主题
 
-1. Hello World - 您的第一个 Node.js 脚本
+1. Hello World - 第一个 Node.js 脚本
 2. 变量 - 在 Node.js 中使用变量
 3. 常量 - 理解常量声明
 4. 循环 - 实现不同类型的循环
