@@ -1,6 +1,6 @@
 ---
 import Layout from "./Layout.astro";
-import CopyCode from '../components/CopyCode.astro';
+import CopyCode from "../components/CopyCode.astro";
 
 import NextPostLink from "../components/NextPostLink.astro";
 const { title } = Astro.props;
@@ -14,11 +14,11 @@ const { title } = Astro.props;
     <slot name="head" />
   </div>
   <div class="blog-content">
-	  <div class="comment-wrapper">
+    <div class="comment-wrapper">
       <slot name="comment" />
     </div>
     <div class="code-wrapper">
-		<CopyCode/>
+      <CopyCode />
       <slot name="code" />
     </div>
   </div>
@@ -26,7 +26,7 @@ const { title } = Astro.props;
 </Layout>
 <NextPostLink currentUrl={Astro.url.pathname} />
 
-<style>
+<style lang="less">
   .title {
     font-size: 32px;
     line-height: 40px;
@@ -46,8 +46,21 @@ const { title } = Astro.props;
   }
   .code-wrapper {
     width: 480px;
+    position: relative;
   }
   .lead {
     margin-bottom: 16px;
+  }
+</style>
+<style is:global lang="less">
+  .code-wrapper {
+    .copy-code-container {
+      opacity: 0;
+    }
+    &:hover {
+      .copy-code-container {
+        opacity: 1;
+      }
+    }
   }
 </style>
