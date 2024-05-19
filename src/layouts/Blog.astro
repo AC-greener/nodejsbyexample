@@ -1,6 +1,7 @@
 ---
 import Layout from "./Layout.astro";
 import CopyButton from "../components/CopyButton.astro";
+import Footer from "../components/Footer.astro";
 
 import NextPostLink from "../components/NextPostLink.astro";
 const { title } = Astro.props;
@@ -23,8 +24,9 @@ const { title } = Astro.props;
     </div>
   </div>
   <slot />
+  <NextPostLink currentUrl={Astro.url.pathname} />
+  <Footer/>
 </Layout>
-<NextPostLink currentUrl={Astro.url.pathname} />
 
 <style lang="less">
   .title {
