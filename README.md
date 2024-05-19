@@ -1,54 +1,31 @@
-# Astro Starter Kit: Basics
+# Nodejs by Example
+[Node.js by Example](https://www.nodejsbyexample.cn/) 是一个通过带注释的示例程序学习 Node.js 的网站。网站提供了从简单的 Hello World 到复杂的异步编程和流处理等各个方面的示例，并附有详细的注释，非常适合刚开始学习 Node.js 的用户。
 
-```sh
-npm create astro@latest -- --template basics
-```
+如果你希望掌Node.js 的基础知识，请直接前往 [Node.js by Example](https://www.nodejsbyexample.cn/) 开始您的学习之旅！
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+如果这个项目对你有帮助，可以给我们一个 Star～
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## 涵盖的主题
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+1. Hello World - 第一个 Node.js 脚本
+2. 变量 - 在 Node.js 中使用变量
+3. 常量 - 理解常量声明
+4. 循环 - 实现不同类型的循环
+5. 条件判断 
+6. Switch 语句 - 使用 switch-case 进行多分支切换
+7. 数组 - 使用数组数据结构
+8. 缓冲区 - 处理二进制数据
+9. 对象 -Node.js中对象的基础
+10. 迭代 - 使用循环和迭代器迭代
 
-## 🚀 Project Structure
+## 贡献
 
-Inside of your Astro project, you'll see the following folders and files:
+欢迎您的贡献以提升 Nodejs by Example！任何错误或建议，请随时创建问题，改进建议请提交 pull 请求。
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+## 许可证
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+此项目采用 MIT 许可证授权 - 详情请见 LICENSE.md 文件。
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## 鸣谢
 
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+感谢[Go By Example](https://github.com/mmcgrana/gobyexample)项目，它激发了这个项目的灵感。
