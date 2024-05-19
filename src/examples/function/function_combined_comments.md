@@ -1,0 +1,1 @@
+在nodejs中, 'function' 关键字用于声明函数.
