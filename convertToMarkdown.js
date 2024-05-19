@@ -2,13 +2,14 @@ import fs from 'fs';
 import path from 'path';
 import writeMarkdownFile from './fileWriter.js';
 import { splitCommentToMultiLines, isNotContainChinese } from './utils.js';
-// 从命令行参数中接收JS文件名的基本部分
-const jsFileBaseName = process.argv[2];
-if (!jsFileBaseName) {
-  console.error("请提供一个JS文件基本名字作为参数（不包含.js扩展）");
-  process.exit(1);
-}
 
+  // 从命令行参数中接收JS文件名的基本部分
+  const jsFileBaseName = process.argv[2];
+  if (jsFileBaseName) {
+    convertToMd(jsFileBaseName)
+  }
+
+function convertToMd(jsFileBaseName) {
 // 完整的JS文件路径
 const jsFileName = `./src/examples/${jsFileBaseName}/${jsFileBaseName}.js`;
 // 生成mkdown文件的完整路径
@@ -111,9 +112,10 @@ fs.readFile(jsFileName, "utf8", (err, data) => {
       if (line.trim().startsWith("//")) {
         // 如果是注释，去掉'//'，并且添加到注释数组
         // commentArray.push(line.trim());
-        // console.log('line', line)
         const commentContent = line.trim().substring(2).trim();
         const maxLineLength = isNotContainChinese(commentContent) ? 45 : 28;
+        console.log('commentContent', commentContent)
+        console.log('maxLineLength', maxLineLength)
         const splitComments = splitCommentToMultiLines(commentContent, maxLineLength);
         commentArray.push(...splitComments);
       } else {
@@ -177,3 +179,6 @@ fs.readFile(jsFileName, "utf8", (err, data) => {
     `写入Markdown文件${codeMDFilePath}时发生错误:`
   );
 });
+}
+
+export default convertToMd
