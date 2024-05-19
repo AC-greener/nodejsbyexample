@@ -6,7 +6,7 @@ const list = [
     { "eng-name": "For", name: "循环" },
     { "eng-name": "If Else", name: "条件判断" },
     { "eng-name": "Switch", name: "Switch语句" },
-    { "eng-name": "Arrays", name: "数组" },
+    { "eng-name": "Array", name: "数组" },
     { "eng-name": "Function", name: "函数" },
     // { "eng-name": "String and Character Encoding", name: "字符串与字符编码" },
     // { "eng-name": "String Manipulation", name: "字符串操作" },

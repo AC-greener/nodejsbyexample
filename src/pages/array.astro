@@ -1,0 +1,13 @@
+---
+import BlogLayout from "../layouts/Blog.astro";
+import Code from "../examples/array/array_code.md";
+import Comment from "../examples/array/array_comment.md";
+import Head from "../examples/array/array_combined_comments.md";
+---
+
+<BlogLayout title="Nodejs by Example: Array">
+  <span slot="title"> Array</span>
+  <Head slot="head" />
+  <Comment slot="comment" />
+  <Code slot="code" />
+</BlogLayout>

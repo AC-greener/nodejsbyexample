@@ -1,0 +1,13 @@
+---
+import BlogLayout from "../layouts/Blog.astro";
+import Code from "../examples/function/function_code.md";
+import Comment from "../examples/function/function_comment.md";
+import Head from "../examples/function/function_combined_comments.md";
+---
+
+<BlogLayout title="Nodejs by Example: Function">
+  <span slot="title"> Function</span>
+  <Head slot="head" />
+  <Comment slot="comment" />
+  <Code slot="code" />
+</BlogLayout>
