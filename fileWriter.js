@@ -1,6 +1,5 @@
 // fileWriter.js
-const fs = require("fs");
-
+import fs from 'fs'
 function writeMarkdownFile(filePath, content, successMessage, errorMessage) {
   fs.writeFile(filePath, content, "utf8", (err) => {
     if (err) {
@@ -11,4 +10,4 @@ function writeMarkdownFile(filePath, content, successMessage, errorMessage) {
   });
 }
 
-module.exports = writeMarkdownFile;
+export default writeMarkdownFile

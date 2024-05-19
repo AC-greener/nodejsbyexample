@@ -1,7 +1,7 @@
-const fs = require("fs");
-const path = require("path");
-const writeMarkdownFile = require("./fileWriter");
-const {splitCommentToMultiLines, isNotContainChinese } = require('./utils')
+import fs from 'fs';
+import path from 'path';
+import writeMarkdownFile from './fileWriter.js';
+import { splitCommentToMultiLines, isNotContainChinese } from './utils.js';
 // 从命令行参数中接收JS文件名的基本部分
 const jsFileBaseName = process.argv[2];
 if (!jsFileBaseName) {
