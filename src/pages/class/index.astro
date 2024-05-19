@@ -1,0 +1,13 @@
+---
+import BlogLayout from "../../layouts/Blog.astro";
+import Code from "./class_code.md";
+import Comment from "./class_comment.md";
+import Head from "./class_combined_comments.md";
+---
+
+<BlogLayout title="Nodejs by Example: Class">
+  <span slot="title"> Class</span>
+  <Head slot="head" />
+  <Comment slot="comment" />
+  <Code slot="code" />
+</BlogLayout>

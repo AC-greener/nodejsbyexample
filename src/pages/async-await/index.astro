@@ -1,0 +1,13 @@
+---
+import BlogLayout from "../../layouts/Blog.astro";
+import Code from "./async-await_code.md";
+import Comment from "./async-await_comment.md";
+import Head from "./async-await_combined_comments.md";
+---
+
+<BlogLayout title="Nodejs by Example: Async-Await">
+  <span slot="title"> Async-Await</span>
+  <Head slot="head" />
+  <Comment slot="comment" />
+  <Code slot="code" />
+</BlogLayout>
