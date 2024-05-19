@@ -32,9 +32,9 @@ function generateAstroFile(variableName) {
 
     const content = `---
 import BlogLayout from "../../layouts/Blog.astro";
-import Code from "../../examples/${variableName}/${variableName}_code.md";
-import Comment from "../../examples/${variableName}/${variableName}_comment.md";
-import Head from "../../examples/${variableName}/${variableName}_combined_comments.md";
+import Code from "./${variableName}_code.md";
+import Comment from "./${variableName}_comment.md";
+import Head from "./${variableName}_combined_comments.md";
 ---
 
 <BlogLayout title="Nodejs by Example: ${capitalizedVariableName}">

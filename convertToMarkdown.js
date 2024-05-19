@@ -14,15 +14,15 @@ function convertToMd(jsFileBaseName) {
 const jsFileName = `./src/examples/${jsFileBaseName}/${jsFileBaseName}.js`;
 // 生成mkdown文件的完整路径
 const commentsMDFilePath = path.join(
-  `./src/examples/${jsFileBaseName}`,
+  `./src/pages/${jsFileBaseName}`,
   `${jsFileBaseName}_comment.md`
 );
 const codeMDFilePath = path.join(
-  `./src/examples/${jsFileBaseName}`,
+  `./src/pages/${jsFileBaseName}`,
   `${jsFileBaseName}_code.md`
 );
 const combinedCommentsMDFilePath = path.join(
-  `./src/examples/${jsFileBaseName}`,
+  `./src/pages/${jsFileBaseName}`,
   `${jsFileBaseName}_combined_comments.md`
 );
 
