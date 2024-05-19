@@ -6,20 +6,17 @@ function plus(a, b) {
   return a + b;
 }
 
-// `plusplus` 函数接受三个参数 a, b 和 c,
-// 返回这三个参数的和.
+// `plusplus` 函数接受三个参数 a, b 和 c, 返回这三个参数的和.
 function plusPlus(a, b, c) {
   return a + b + c;
 }
 
 // 执行`plus`函数
 let res = plus(1, 2);
-
 console.log('1+2 = ', res);
 
 //  执行`plusplus`函数
 res = plusPlus(1, 2, 3);
-
 console.log('1+2+3 = ', res);
 
 // 函数可以有默认参数，'name' 参数具有默认值 'Friend'，age默认值为18

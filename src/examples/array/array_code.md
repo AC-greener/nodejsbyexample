@@ -1,7 +1,7 @@
 ```javascript
 let array = ["apple", "banana", "cherry"];
 
-console.log(array[0]); // 输出 "apple"
+console.log(array[0]);
 
 
 array[0] = "avocado";

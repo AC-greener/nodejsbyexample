@@ -4,7 +4,7 @@
 let array = ["apple", "banana", "cherry"];
 
 // 使用 `array[index]` 语法获取数组中指定位置的值
-console.log(array[0]); // 输出 "apple"
+console.log(array[0]);
 
 
 // 使用 `array[index] = value` 语法设置数组中指定位置的值

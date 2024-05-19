@@ -8,11 +8,9 @@ function plusPlus(a, b, c) {
 }
 
 let res = plus(1, 2);
-
 console.log('1+2 = ', res);
 
 res = plusPlus(1, 2, 3);
-
 console.log('1+2+3 = ', res);
 
 function greet(name = "Friend", age = 18) {

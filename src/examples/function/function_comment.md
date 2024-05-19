@@ -8,9 +8,9 @@
 
 `plusplus` 函数接受三个参数 a, b 和
 
-c,
+c, 返回这三个参数的和.
 
-返回这三个参数的和.
+<div style="min-height: 24px;"></div>
 
 <div style="min-height: 24px;"></div>
 
@@ -20,11 +20,7 @@ c,
 
 <div style="min-height: 24px;"></div>
 
-<div style="min-height: 24px;"></div>
-
 执行`plusplus`函数
-
-<div style="min-height: 24px;"></div>
 
 <div style="min-height: 24px;"></div>
 
