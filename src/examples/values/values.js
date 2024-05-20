@@ -21,5 +21,5 @@ var name = "cat";
 var age = 3;
 
 // 也可以使用 `let` 关键字来声明。
-let name = "cat";
-let age = 3;
+let x = 1;
+let y = 2;

@@ -1,1 +1,2 @@
-node hello-world.js
+$ node hello-world.js
+Hello World

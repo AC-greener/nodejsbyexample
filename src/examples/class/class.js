@@ -12,7 +12,7 @@ var person = new Person("John", 25);
 console.log(person);
 
 //除了构造函数，还可以定义其它方法。
-class Person {
+class Person1 {
   constructor(name, age) {
     this.name = name;
     this.age = age;
@@ -22,7 +22,7 @@ class Person {
       and I am ${this.age} years old.`);
   }
 }
-var person = new Person("John", 25);
+var person = new Person1("John", 25);
 person.greet();
 
 // 使用extends关键字可以创建一个继承自其它类的类。
