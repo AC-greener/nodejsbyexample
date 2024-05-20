@@ -3,6 +3,7 @@ import BlogLayout from "../../layouts/Blog.astro";
 import Code from "./hello-world_code.md";
 import Comment from "./hello-world_comment.md";
 import Head from "./hello-world_combined_comments.md";
+import ScriptOutPut from "./hello-world_output.md";
 ---
 
 <BlogLayout title="Nodejs by Example: Hello-World">
@@ -10,4 +11,5 @@ import Head from "./hello-world_combined_comments.md";
   <Head slot="head" />
   <Comment slot="comment" />
   <Code slot="code" />
+  <ScriptOutPut slot="output" />
 </BlogLayout>

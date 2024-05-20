@@ -19,13 +19,18 @@ const { title } = Astro.props;
       <slot name="comment" />
     </div>
     <div class="code-wrapper">
-      <CopyButton />
-      <slot name="code" />
+      <div>
+        <CopyButton />
+        <slot name="code" />
+      </div>
+      <div class="output">
+        <slot name="output" />
+      </div>
     </div>
   </div>
   <slot />
   <NextPostLink currentUrl={Astro.url.pathname} />
-  <Footer/>
+  <Footer />
 </Layout>
 
 <style lang="less">
@@ -45,6 +50,9 @@ const { title } = Astro.props;
   .lead {
     padding-right: 20px;
     width: 420px;
+  }
+  .output {
+    margin-top: 16px;
   }
   .code-wrapper {
     width: 500px;
