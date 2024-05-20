@@ -35,6 +35,7 @@ import BlogLayout from "../../layouts/Blog.astro";
 import Code from "./${variableName}_code.md";
 import Comment from "./${variableName}_comment.md";
 import Head from "./${variableName}_combined_comments.md";
+import ScriptOutPut from "./${variableName}_output.md";
 ---
 
 <BlogLayout title="Nodejs by Example: ${capitalizedVariableName}">
@@ -42,6 +43,7 @@ import Head from "./${variableName}_combined_comments.md";
   <Head slot="head" />
   <Comment slot="comment" />
   <Code slot="code" />
+  <ScriptOutPut slot="output" />
 </BlogLayout>
 `;
 
