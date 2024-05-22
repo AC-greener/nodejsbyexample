@@ -4,11 +4,33 @@
 
 <div style="min-height: 24px;"></div>
 
-重新赋值给cat，会产生报错:
+const声明的常量具有块级作用域
 
-TypeError: Assignment to constant variable。
+ReferenceError: a is not defined
+
+<div style="min-height: 24px;"></div>
+
+<div style="min-height: 24px;"></div>
+
+<div style="min-height: 24px;"></div>
+
+<div style="min-height: 24px;"></div>
 
 
 
-一个`const`语句可以出现在任何一个`var`语句可以出现的地方。
+虽然使用const声明的变量不能被重新赋值，但如果它是一个对象，对象内部的属性可以被修改。
+
+<div style="min-height: 24px;"></div>
+
+<div style="min-height: 24px;"></div>
+
+<div style="min-height: 24px;"></div>
+
+TypeError: Assignment to constant variable.
+
+<div style="min-height: 24px;"></div>
+
+<div style="min-height: 24px;"></div>
+
+<div style="min-height: 24px;"></div>
 

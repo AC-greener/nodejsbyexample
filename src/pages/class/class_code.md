@@ -4,35 +4,32 @@ class Person {
     this.name = name;
     this.age = age;
   }
-}
-var person = new Person("John", 25);
-console.log(person);
 
-class Person {
-  constructor(name, age) {
-    this.name = name;
-    this.age = age;
-  }
   greet() {
-    console.log(`Hi, my name is ${this.name} 
-      and I am ${this.age} years old.`);
+    console.log(`Hi, I'm ${this.name}, ${this.age} years old.`);
   }
 }
-var person = new Person("John", 25);
+
+let person = new Person("John", 18);
 person.greet();
 
-class Employee extends Person {
+class Programmer extends Person {
   constructor(name, age, title) {
     super(name, age);
     this.title = title;
   }
+
+  coding() {
+    console.log(`${this.name} is coding.`);
+  }
+
   greet() {
-    console.log(
-      `Hello, my name is ${this.name}, I am ${this.age} years old and I work as a ${this.title}.`
-    );
+    console.log(`Hello, I'm ${this.name}, ${this.age}, ${this.title}.`);
   }
 }
-var employee = new Employee("John", 25, "Developer");
-employee.greet();
+
+let programmer = new Programmer("John", 18, "Front End");
+programmer.coding();
+programmer.greet();
 
 ```

@@ -1,42 +1,41 @@
-// JavaScript的class是一种基于原型的继承语法糖，提供了更接近传统面向对象语言的语法。
+// 在Nodejs中，class是一个用于创建对象的语法糖，可以创建具有属性和方法的对象类型。
 
-// 创建一个类。可以使用class关键字创建一个类，然后在其内部使用constructor方法定义构造函数。
+// 可以使用class关键字创建一个类，使用constructor方法定义构造函数。
 class Person {
   constructor(name, age) {
     this.name = name;
     this.age = age;
   }
-}
-// 使用new关键字创建类的实例
-var person = new Person("John", 25);
-console.log(person);
 
-//除了构造函数，还可以定义其它方法。
-class Person1 {
-  constructor(name, age) {
-    this.name = name;
-    this.age = age;
-  }
+  // 定义一个问候方法
   greet() {
-    console.log(`Hi, my name is ${this.name} 
-      and I am ${this.age} years old.`);
+    console.log(`Hi, I'm ${this.name}, ${this.age} years old.`);
   }
 }
-var person = new Person1("John", 25);
+
+// 使用new关键字创建Person实例并调用greet方法
+let person = new Person("John", 18);
 person.greet();
 
-// 使用extends关键字可以创建一个继承自其它类的类。
-class Employee extends Person {
+// 通过extends关键字创建子类，继承Person类
+class Programmer extends Person {
   constructor(name, age, title) {
     // 在构造函数中使用super()调用了父类的构造函数
     super(name, age);
     this.title = title;
   }
+
+  coding() {
+    console.log(`${this.name} is coding.`);
+  }
+
+  // 重写greet方法
   greet() {
-    console.log(
-      `Hello, my name is ${this.name}, I am ${this.age} years old and I work as a ${this.title}.`
-    );
+    console.log(`Hello, I'm ${this.name}, ${this.age}, ${this.title}.`);
   }
 }
-var employee = new Employee("John", 25, "Developer");
-employee.greet();
+
+// 创建Programmer实例并调用greet方法
+let programmer = new Programmer("John", 18, "Front End");
+programmer.coding();
+programmer.greet();

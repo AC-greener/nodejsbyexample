@@ -1,6 +1,7 @@
 ```shell
 $ node const.js
-baobao
-1
+3.14
+42
+{ name: 'John', age: 31 }
 
 ```

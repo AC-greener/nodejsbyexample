@@ -13,7 +13,7 @@ console.log(!false);
 var name = "cat";
 var age = 3;
 
-let name = "cat";
-let age = 3;
+let x = 1;
+let y = 2;
 
 ```

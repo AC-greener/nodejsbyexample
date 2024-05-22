@@ -1,9 +1,20 @@
 ```javascript
-const cat = "baobao";
-console.log(cat);
+const PI = 3.14;
+console.log(PI);
 
-cat = "maimai"
+if (true) {
+  const a = 42;
+  console.log(a);
+}
+console.log(a);
 
-const age = 1;
-console.log(age);
+const person = {
+  name: "John",
+  age: 30,
+};
+
+person.age = 31;
+console.log(person);
+person = { name: "Jane", age: 25 };
+
 ```
