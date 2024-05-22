@@ -28,8 +28,7 @@ async function executeScriptAndSaveOutput(fileName) {
       runCommand + stdout + (stderr ? "\nError Output:\n" + stderr : "");
     const markdownContent = `\`\`\`shell
 $ node ${fileName}.js
-${stdout}${stderr ? "\nError Output:\n" + stderr : ""}
-\`\`\`
+${stdout}${stderr ? "\nError Output:\n" + stderr : ""}\`\`\`
 `;
     try {
       await fs.writeFile(txtFilePath, output);

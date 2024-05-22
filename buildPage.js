@@ -1,3 +1,4 @@
+// 根据postList生成/pages/xxx/index.astro
 import postList from './src/postList.js';
 import fs from 'fs';
 import path from 'path';
