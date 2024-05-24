@@ -16,8 +16,8 @@ const list = [
     { "eng-name": "Array Functions", name: "数组常用函数" },
     // { "eng-name": "Promises", name: "Promises" },
     // { "eng-name": "Async-Await", name: "Async/Await" },
-    // { "eng-name": "Regular Expressions", name: "正则表达式" },
-    // { "eng-name": "JSON Handling", name: "JSON处理" },
+    { "eng-name": "Regular Expressions", name: "正则表达式" },
+    { "eng-name": "JSON", name: "JSON" },
     // 提升编程技巧
     // { "eng-name": "Closures", name: "闭包" },
     // { "eng-name": "Prototypes and Inheritance", name: "原型与继承" },
